@@ -14,5 +14,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: music
-      run: docker build . --file Dockerfile --tag music:$(date +%s)
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+    - name: Log in to Docker Hub
+      run: echo dckr_pat_QrkbVL47tqR0nVEfqZ06h-m2jw4 | docker login -u suvarnalaxmi25 --password-stdin
+
+    - name: Push Docker image to Docker Hub
+      run: docker push suvarnalaxmi/music:$(date +%s)
